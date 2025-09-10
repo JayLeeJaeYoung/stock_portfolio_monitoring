@@ -1,0 +1,55 @@
+name: Weekly Cron Email
+
+on:
+  schedule:
+    - cron: "10 20 * * 5" # 20:10 UTC = 4:10 PM ET, Fridays only
+  workflow_dispatch:
+
+jobs:
+  send-weekly-report:
+    runs-on: ubuntu-latest
+
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      MAIN_USERNAME: ${{ secrets.MAIN_USERNAME }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run weekly cron job and generate email body
+        run: python -c "from cron_jobs import weekly_cron_job; import os; print(weekly_cron_job(os.getenv('MAIN_USERNAME')))" > email_body.html
+
+      - name: Check if email body was created
+        run: |
+          if [ ! -f email_body.html ]; then
+            echo "Error: email_body.html was not created"
+            exit 1
+          fi
+          echo "Weekly email body content:"
+          cat email_body.html
+
+      - name: Send email using Gmail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Weekly Investment Report 📊
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: Investment Board Github Action <${{ secrets.EMAIL_USERNAME }}>
+          html_body: file://email_body.html
+
+      - name: Cleanup
+        if: always()
+        run: rm -f email_body.html

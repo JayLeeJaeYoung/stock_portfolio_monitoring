@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Roboto+Flex&display=swap");
+
+body {
+  background: linear-gradient(to right, rgb(213, 218, 251), rgb(122, 135, 233)),
+    url("background_aurora.png") no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: screen; /* Changed from screen to overlay for better blending */
+}
+
+#app-title-card {
+  max-width: fit-content;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  padding: 10px;
+  box-shadow: none;
+}
+
+#app-title-card:hover {
+  transform: scale(1.05);
+}
+
+.no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+#main-card {
+  margin: 0;
+  padding: 0px 5px 15px 5px;
+
+  background: linear-gradient(to right, rgb(213, 218, 251), rgb(122, 135, 233)),
+    url("background_aurora.png") no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: screen; /* Changed from screen to overlay for better blending */
+}
+
+.title-font {
+  font-family: "Fredericka the Great", serif;
+}
+
+/* added from col_def */
+.green-font {
+  color: green;
+}
+
+.ag-red-cell {
+  color: red;
+}
+
+[id*="insert-row-button"]:disabled {
+  background-color: #a9b1f1 !important;
+  color: white !important;
+  opacity: 1 !important;
+}
+
+[id*="insert-row-card"] {
+  background-color: #ecefff;
+  max-width: fit-content;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  transition: background 0.3s ease-in-out;
+  margin-left: 20px;
+  transform: scale(1.05);
+}
+
+.dramatic-hover:hover {
+  transform: scale(1.02) !important;
+}
+
+.input-width {
+  max-width: 150px;
+}
+
+.textinput-width {
+  min-width: 320px;
+}
+
+/* portfolio_table_layout */
+.ag-theme-quartz {
+  --ag-font-family: "Roboto Flex", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif; /* Updated to Roboto Flex */
+}
+
+.ag-theme-quartz .ag-header {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-mantine-color-scheme="light"] .ag-theme-quartz {
+  --ag-background-color: white;
+  --ag-header-background-color: var(--mantine-color-custom-blue-0);
+
+  --ag-foreground-color: black;
+  --ag-header-foreground-color: black;
+  --ag-border-color: var(--mantine-color-gray-4);
+
+  --ag-row-hover-color: var(--mantine-color-custom-blue-0);
+  --ag-selected-row-background-color: var(--mantine-color-custom-blue-3);
+  --ag-range-selection-background-color: var(--mantine-color-custom-blue-3);
+  --ag-subheader-background-color: var(--mantine-color-gray-2);
+}
